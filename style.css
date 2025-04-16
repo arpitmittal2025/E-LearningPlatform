@@ -1,0 +1,135 @@
+:root{
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    --text-primary:#CFD0D1;
+    --text-secondary:#ffffff;
+    --bg-primary: #333;
+    --bg-secondary: #000;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+}
+
+/* Scrollbar  */
+body::-webkit-scrollbar{
+    width: 0.25rem;
+}
+body::-webkit-scrollbar-track{
+    background: #1e1e24;
+}
+
+/* navigation bar */
+.navbar{
+    width: 5vw;
+    height: 100vh;
+    padding-left: 0.5rem;
+    position: fixed;
+    background-color: var(--bg-secondary);
+    transition: 400ms ease-in-out;
+}
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+.navlink{
+    display: flex;
+    align-items: center;
+    height: 15vh;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+.linktext{
+    display: none;
+    margin-left: 2vw;
+}
+.navbar:hover{
+    width: 15vw;
+    background: #1e1e24;
+}
+.navbar:hover .linktext{
+    display: block;
+}
+.navbar:hover #menuIcon{
+    display: none;
+}
+.logo{
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 3vh;
+    margin-bottom: 1vw;
+    text-align: center;
+    font-size: 2rem;
+    letter-spacing: 0.3ch;
+    width: 100%;
+    color: var(--text-primary);
+}
+
+#login{
+    height: 50px;
+    width: 50px;
+}
+#logincontainer{
+    margin: 43vh;
+}
+#logout{
+    margin-top: 30vh;    
+}
+
+
+/* MAIN content */
+
+.main {
+    margin-left: 5vw;
+    padding: 1rem;
+    height: 100vh;
+    background: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.main p {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+.main button {
+    background-color: var(--text-primary);
+    color: var(--bg-secondary);
+    padding: 15px 20px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 200ms;
+}
+
+.main button:hover {
+    background-color: #ff8c00;
+}
+
+.main button a {
+    color: #333;
+    text-decoration: none;
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.hidden{
+    display: none;
+}

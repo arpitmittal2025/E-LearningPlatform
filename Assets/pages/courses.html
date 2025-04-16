@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Venture Online Courses</title>
+    <link rel="stylesheet" href="./stylec.css">
+    <style>
+        /* Style for View Cart Button */
+        .cart-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cart-button {
+            display: inline-block;
+            background-color: #ff9800;
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .cart-button:hover {
+            background-color: #e68900;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li class="logo">
+                <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="40" viewBox="0,0,256,256">
+                    <g fill="#fffefe"><g transform="scale(5.12,5.12)"><path d="M0,9v2h50v-2zM0,24v2h50v-2zM0,39v2h50v-2z"></path></g></g>
+                </svg>
+                <span class="linktext">MENU</span>                
+            </li>
+            <li class="nav-item"> 
+                <a href="../pages/about.html" class="navlink">
+                    <img src="../svg/about.svg"> 
+                    <span class="linktext">About us</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="contact.html" class="navlink">
+                    <img src="../img/Contact.png">
+                    <span class="linktext">Contact us</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="./MyLearning.html" class="navlink notvisible" id="learning">
+                    <img src="../img/learning.png">
+                    <span class="linktext">My learning</span>
+                </a>
+            </li>
+            <li class="nav-item" id="logincontainer">
+                <a href="../pages/form.html" class="navlink">
+                    <img src="../svg/profilePicMale.svg" id="login">
+                    <span class="linktext">Login/Signup</span>
+                </a>
+            </li>
+            <li class="nav-item hidden" id="logout">
+                <a class="navlink"><img src="../img/logout.png">
+                <span class="linktext">LogOut</span></a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main">
+        <section class="hero hidden">
+            <h1 class="animate-text">Upgrade Your Skills</h1>
+            <p class="animate-text">Learn from highly professional experts in various fields and expand your knowledge.</p>
+        </section>
+
+        <section class="courses hidden">
+            <h2>Popular Courses</h2>
+            <div class="course-grid">
+                <div class="course-item" data-course-id="1" data-course-name="Web Development Basics" data-course-price="1199">
+                    <img src="../img/webDev.jpeg">
+                    <h3>Web Development Basics</h3>
+                    <p>Learn the fundamentals of web development. Build websites from scratch.</p>
+                    <p>Price: 1199 Rs</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="course-item" data-course-id="2" data-course-name="Python Programming" data-course-price="1299">
+                    <img src="../svg/python.svg">
+                    <h3>Python Programming</h3>
+                    <p>Master Python programming language. Learn data structures and algorithms.</p>
+                    <p>Price: 1299 Rs</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="course-item" data-course-id="3" data-course-name="Graphic Design" data-course-price="899">
+                    <img src="../img/graphicDesign.png">
+                    <h3>Graphic Design</h3>
+                    <p>Create stunning visual designs. Learn Adobe Photoshop and Illustrator.</p>
+                    <p>Price: 899 Rs</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="course-item" data-course-id="4" data-course-name="Digital Marketing" data-course-price="1599">
+                    <img src="../img/digitalMarketing.jpeg">
+                    <h3>Digital Marketing</h3>
+                    <p>Learn effective marketing strategies. Master SEO and social media marketing.</p>
+                    <p>Price: 1599 Rs</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- View Cart Button -->
+        <div class="cart-container">
+            <a href="cart.html" class="cart-button">View Cart (<span id="cart-count">0</span>)</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 EdVernture. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function updateCartUI() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+
+            document.querySelectorAll('.course-item').forEach(courseItem => {
+                let courseId = courseItem.getAttribute('data-course-id');
+                let button = courseItem.querySelector('.add-to-cart');
+                
+                if (cart.some(course => course.id === courseId)) {
+                    button.textContent = 'Added to Cart';
+                    button.style.backgroundColor = '#4CAF50';
+                    button.disabled = true;
+                } else {
+                    button.textContent = 'Add to Cart';
+                    button.style.backgroundColor = '#ff9800';
+                    button.disabled = false;
+                }
+            });
+        }
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', (event) => {
+                let courseItem = event.target.closest('.course-item');
+                let course = {
+                    id: courseItem.getAttribute('data-course-id'),
+                    name: courseItem.getAttribute('data-course-name'),
+                    price: parseInt(courseItem.getAttribute('data-course-price')),
+                    img: courseItem.querySelector('img').src
+                };
+
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                
+                if (!cart.some(c => c.id === course.id)) {
+                    cart.push(course);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartUI();
+                }
+            });
+        });
+            
+            const observer = new IntersectionObserver((entries)=>{
+                entries.forEach((entry) => {
+                    console.log(entry)
+                    if(entry.isIntersecting){
+                        entry.target.classList.add('show');
+                    }
+                    else{
+                        entry.target.classList.remove('show');
+                    }
+                })
+            });
+            const animationElement = document.querySelectorAll(".hidden");
+            animationElement.forEach((el)=>observer.observe(el));
+
+            const logoutBtn = document.getElementById("logout");
+
+            function chkLogin(){
+                const logUser = localStorage.getItem("loggedInUser");
+                if(logUser){
+                    chkPurchase();
+                    document.getElementById("logincontainer").classList.add('notvisible');
+                    logoutBtn.classList.remove('notvisible');
+                }
+                else{
+                    logoutBtn.classList.add('notvisible');
+                }
+            }
+            chkLogin()
+    
+            logoutBtn.addEventListener("click",()=>{
+                localStorage.removeItem("loggedInUser");
+                location.reload();
+            })
+
+            function chkPurchase(){
+                const purchased = localStorage.getItem("purchasedCourses");
+                if(purchased){
+                    document.getElementById("learning").classList.remove('notvisible');
+                    document.getElementById("logout").classList.add("withcourse");
+                }
+                else{
+                    document.getElementById("learning").classList.add('notvisible');
+                    document.getElementById("logout").classList.add("withoutcourse");
+                }
+            }
+            
+    </script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Edu Venture</title>
+    <link rel="stylesheet" href="./contact.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li class="logo">
+                <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="40" viewBox="0,0,256,256">
+                    <g fill="#fffefe" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M0,9v2h50v-2zM0,24v2h50v-2zM0,39v2h50v-2z"></path></g></g>
+                </svg>
+                <span class="linktext">MENU</span>                
+            </li>
+            <li class="nav-item"> 
+                <a href="../pages/about.html" class="navlink">
+                    <img src="../svg/about.svg">
+                    <span class="linktext">
+                        About us
+                    </span>
+                </a>
+            </li>
+            <li id="courses" class="nav-item">
+                <a href="./courses.html" class="navlink">
+                    <img src="../img/Courses.png">
+                    <span class="linktext">Courses</span>
+                </a>
+            </li>
+            <li class="nav-item" id="logincontainer">
+                <a href="./form.html" class="navlink">
+                    <img src="../svg/profilePicMale.svg" id="login">
+                    <span class="linktext">Login/Signup</span>
+                </a>
+            </li>
+            <li class="nav-item hidden" id="logout">
+                <a class="navlink"><img src="../img/logout.png">
+                <span class="linktext">LogOut</span></a>
+            </li>
+        </ul>
+    </nav>
+
+<!-- Main Content -->
+<div class="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Get in Touch</h1>
+        <p>We'd love to hear from you! Reach out to us for any inquiries or support.</p>
+    </section>
+
+    <section class="contact-info">
+        <h2 class="section-title">Our Contact Details</h2>
+        <p><strong>Email:</strong> support@edvernture.com</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Address:</strong> 123, EdVernture Street, New Delhi, India</p>
+    </section>
+
+    <section>
+        <h2 class="section-title">Want us to contact you instead? Fill out the form below.</h2>
+        <form action="#" method="post">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 EdVernture. All Rights Reserved.</p>
+    </footer>
+</div>
+<script>
+    const logoutBtn = document.getElementById("logout");
+
+    function chkLogin(){
+        const logUser = localStorage.getItem("loggedInUser");
+        if(logUser){
+            document.getElementById("courses").style.display = "block";
+            document.getElementById("logincontainer").classList.add('hidden');
+            logoutBtn.classList.remove('hidden');
+        }
+        else{
+            document.getElementById("courses").style.display = "none";
+            document.getElementById("logincontainer").classList.remove('hidden');
+            logoutBtn.classList.add('hidden');
+        }
+    }
+    chkLogin()
+
+    logoutBtn.addEventListener("click",()=>{
+        localStorage.removeItem("loggedInUser");
+        location.reload();
+    })
+</script>
+</body>
+</html>
